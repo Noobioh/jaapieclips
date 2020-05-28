@@ -1,0 +1,25 @@
+#videocard {
+    width: 20%;
+    height: auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 2px;
+    display: inline-block;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(100, 100, 100, 0.2);
+    transition-property: box-shadow, padding;
+    transition-duration: 350ms, 350ms;
+}
+
+#videocard:hover {
+    padding: 5px;
+    box-shadow: 4px 4px 4px rgba(100, 100, 100, 0.4);
+}
+
+.card-title {
+    font-weight: bold;
+    text-align: left;
+    vertical-align: text-top;
+}
