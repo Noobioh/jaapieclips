@@ -1,6 +1,8 @@
 using System.IO;
 using System;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using System.Net.Http.Headers;
 
 namespace jaapieclips.ClientApp.src.components
 {
@@ -10,6 +12,7 @@ namespace jaapieclips.ClientApp.src.components
     {
         [HttpGet]
         [Route("Videos")]
+        
 
         public string Videos()
         {
@@ -17,5 +20,17 @@ namespace jaapieclips.ClientApp.src.components
             SearchOption.TopDirectoryOnly);
             return String.Join(",", filePaths);
         }
+        [HttpGet]
+        [Route("GetVideoContent")]
+                public IActionResult GetVideoContent() {
+
+            var file = new FileStream("./ClientApp/public/clips/mw.mp4", FileMode.Open);
+                FileStreamResult result = File (
+                    fileStream: file,
+                    contentType: new MediaTypeHeaderValue("video/mp4").MediaType,
+                    enableRangeProcessing: true
+                );
+                return result;
+        }
+        }
     }
-}
