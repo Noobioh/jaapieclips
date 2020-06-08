@@ -19,8 +19,8 @@ export default class Videos extends Component {
             let contents = this.state.loading
               ? <p><em>Loading...</em></p>
               :   <div>
-                  {videos.map(video =>
-                  <a href={"/getvideos/getvideocontent?path="+video.path}> 
+                  {this.state.videos.map(video =>
+                  <a href={"/getvideos/getvideocontent?path="+video.file}> 
                  <Card id="videocard">
                  <CardTitle>{video.name}</CardTitle>
                  <CardSubtitle>{video.description}</CardSubtitle>
@@ -39,13 +39,7 @@ export default class Videos extends Component {
                     </Row>
                     <Row>
                         <Col>
-                        <a href="/getvideos/getvideocontent">
-                        <Card id="videocard">
-                            <CardTitle>Modern Warfare</CardTitle>
-                            <CardSubtitle>Warzone clip</CardSubtitle>
-                            <CardImg src="./thumbnails/mw.jpg"></CardImg>
-                        </Card>
-                        </a>
+                        {contents}
                         </Col>
                     </Row>
             </Container>

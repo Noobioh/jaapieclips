@@ -3,6 +3,8 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
+using server.Controllers;
+using System.Collections.Generic;
 
 namespace jaapieclips.ClientApp.src.components
 {
@@ -13,18 +15,29 @@ namespace jaapieclips.ClientApp.src.components
         [HttpGet]
         [Route("Videos")]
         
-
-        public string Videos()
+    	
+        public IActionResult Videos()
         {
-            string[] filePaths = Directory.GetFiles(@"./ClientApp/public/clips", "*.mp4",
+            string[] files = Directory.GetFiles(@"./ClientApp/public/clips", "*.mp4",
             SearchOption.TopDirectoryOnly);
-            return String.Join(",", filePaths);
+
+                var returnList = new List<getvideosmodel>();
+
+                foreach(var file in files){
+                var model = new getvideosmodel();
+                model.file = file;
+                returnList.Add(model);
+}
+
+                return Ok(returnList);
+
         }
         [HttpGet]
         [Route("GetVideoContent")]
-                public IActionResult GetVideoContent() {
+                public IActionResult GetVideoContent(string path) {
 
-            var file = new FileStream("./ClientApp/public/clips/mw.mp4", FileMode.Open);
+
+            var file = new FileStream(path, FileMode.Open);
                 FileStreamResult result = File (
                     fileStream: file,
                     contentType: new MediaTypeHeaderValue("video/mp4").MediaType,
